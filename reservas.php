@@ -25,31 +25,31 @@ $result = mysqli_query($conn, $query);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
 <style>
-    body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #f8f9fa;
-    }
-    .carousel-item img {
-        width: 100%;
-        height: 400px;
-        object-fit: contain;
-        background: #e9e7e7ff;
-    }
-    .navbar, #carouselExample{
-        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-    }
+   body {
+    font-family: 'Poppins', sans-serif;
+    background: url('imagens/hotel1.png') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.9); /* destaca o conteúdo */
+    padding: 20px;
+    border-radius: 10px;
+}
+
 </style>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
   <div class="container-fluid">
     <!-- Logo -->
-    <a class="navbar-brand d-flex align-items-center" href="reservas.php">
-      <img src="imagens/logo.png" alt="Hotel Sol&Mar" width="80" height="80" class="me-2">
+    <a class="navbar-brand d-flex align-items-center" href="index.php">
+      <img src="imagens/logo.png" alt="Hotel Sol&Mar" width="50" height="50" class="me-2">
       <span>Hotel Sol&Mar</span>
     </a>
 
-    <!-- Botão hamburguer (aparece no mobile) -->
+    <!-- Botão hamburguer (mobile) -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
             aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
       <span class="navbar-toggler-icon"></span>
@@ -57,22 +57,18 @@ $result = mysqli_query($conn, $query);
 
     <!-- Links da navbar -->
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto d-flex align-items-center">
-        <!-- Nome do funcionário logado -->
-        <li class="nav-item me-2">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.php">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="clientes.php">Clientes</a></li>
+        <li class="nav-item"><a class="nav-link active" href="reservas.php">Reservas</a></li>
+        <li class="nav-item"><a class="nav-link" href="nova_reserva.php">Nova Reserva</a></li>
+        <li class="nav-item">
           <span class="nav-link text-white">
             👤 <?php echo htmlspecialchars($_SESSION["nome"]); ?> (<?php echo htmlspecialchars($_SESSION["cargo"]); ?>)
           </span>
         </li>
-        <!-- Botão Nova Reserva -->
-        <li class="nav-item me-2">
-          <a href="nova_reserva.php" class="btn btn-success">
-            <i class="bi bi-plus-circle"></i> Nova Reserva
-          </a>
-        </li>
-        <!-- Botão Logout -->
         <li class="nav-item">
-          <a href="logout.php" class="btn btn-danger">
+          <a href="logout.php" class="btn btn-danger ms-2">
             <i class="bi bi-box-arrow-right"></i> Sair
           </a>
         </li>
@@ -80,6 +76,7 @@ $result = mysqli_query($conn, $query);
     </div>
   </div>
 </nav>
+
 
 <div class="container mt-5">
     <h2>Lista de Reservas</h2>
@@ -92,6 +89,8 @@ $result = mysqli_query($conn, $query);
                 <th>Check-in</th>
                 <th>Check-out</th>
                 <th>Estado</th>
+                <th>Ações</th>
+
             </tr>
             
         </thead>
@@ -108,6 +107,15 @@ $result = mysqli_query($conn, $query);
                     echo "<td>".$row['checkin']."</td>";
                     echo "<td>".$row['checkout']."</td>";
                     echo "<td>".$row['estado']."</td>";
+                    echo "<td>
+                      <a href='editar_reserva.php?id=".$row['id']."' class='btn btn-primary btn-sm me-1'>
+                          <i class='bi bi-pencil-square'></i> Editar
+                      </a>
+                      <a href='excluir_reserva.php?id=".$row['id']."' class='btn btn-danger btn-sm' 
+                        onclick='return confirm(\"Tem certeza que deseja excluir esta reserva?\");'>
+                          <i class='bi bi-trash'></i> Excluir
+                      </a>
+                    </td>";
                     echo "</tr>";
                 }
             } else {

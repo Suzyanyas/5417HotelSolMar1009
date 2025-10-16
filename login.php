@@ -44,6 +44,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <title>Login</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: url('imagens/hotelsolemarlogin.png') no-repeat center center;
+    background-size: 100% 100%; /* força a imagem a preencher toda a tela */
+    background-attachment: scroll;
+    min-height: 100vh;
+}
+
+
+</style>
 <body class="bg-light">
 
 <div class="container mt-5">
