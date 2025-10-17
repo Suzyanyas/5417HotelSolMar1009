@@ -40,7 +40,7 @@ if ($result_reservas) {
 body {
     font-family: 'Poppins', sans-serif;
     /* Imagem de fundo */
-    background: url('imagens/1.png') no-repeat center center fixed;
+    background: url('imagens/background2.png') no-repeat center center fixed;
     background-size: cover; /* Preenche a tela mantendo proporção */
     min-height: 100vh;
 }

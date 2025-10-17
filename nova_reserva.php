@@ -46,10 +46,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($erro)) {
-        $query = "INSERT INTO reservas (cliente, quarto, checkin, checkout, estado) 
-                  VALUES (?, ?, ?, ?, 'Ativa')";
+        $query = "INSERT INTO reservas (cliente, quarto, checkin, checkout, estado, funcionario_id) 
+          VALUES (?, ?, ?, ?, 'Ativa', ?)";
         $stmt = mysqli_prepare($conn, $query);
-        mysqli_stmt_bind_param($stmt, "siss", $cliente, $quarto, $checkin, $checkout);
+        mysqli_stmt_bind_param($stmt, "sissi", $cliente, $quarto, $checkin, $checkout, $_SESSION['funcionario_id']);
+
+
 
         if (mysqli_stmt_execute($stmt)) {
             mysqli_stmt_close($stmt);
@@ -72,21 +74,106 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: url('imagens/hotel1.png') no-repeat center center fixed;
-            background-size: cover;
-            min-height: 100vh;
-        }
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)),
+                    url('imagens/background.png') no-repeat center center fixed;
+        background-size: cover;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Navbar translúcida */
+    .navbar {
+        background: rgba(0, 0, 0, 0.7) !important;
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .container-form {
+        background: rgba(255, 255, 255, 0.15); 
+        backdrop-filter: blur(15px); 
+        -webkit-backdrop-filter: blur(15px);
+        border-radius: 20px;
+        padding: 40px;
+        max-width: 600px;
+        margin: 80px auto;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        color: #fff;
+    }
+
+    h2 {
+        text-align: center;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #fff;
+    }
+
+    .form-label {
+        color: #fff;
+        font-weight: 500;
+    }
+
+    .form-control {
+        background-color: rgba(255,255,255,0.2);
+        border: none;
+        color: #fff;
+        border-radius: 10px;
+    }
+
+    .form-control::placeholder {
+        color: #eee;
+    }
+
+    .btn-primary {
+        background-color: #0078ff;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 20px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        
+    }
+
+    .btn-primary:hover {
+        background-color: #005fd1;
+        transform: scale(1.03);
+    }
+
+    .btn-secondary {
+        background-color: rgba(255,255,255,0.3);
+        border: none;
+        color: #fff;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        vertical-align: middle;
+        padding: 10px 20px;
+    }
+
+    .btn-secondary:hover {
+        background-color: rgba(255,255,255,0.5);
+        transform: scale(1.03);
+    }
+    .d-flex {
+        gap: 15px; 
+    }
+
+
+    .alert {
+        background: rgba(255, 0, 0, 0.2);
+        border: 1px solid rgba(255, 0, 0, 0.4);
+        color: #fff;
+    }
+
+    @media (max-width: 768px) {
         .container-form {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 30px;
-            border-radius: 12px;
-            max-width: 600px;
-            margin: 50px auto;
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        padding: 25px;
+        margin: 40px 15px;
         }
-    </style>
+    }
+</style>
+
 </head>
 <body>
 

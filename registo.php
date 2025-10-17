@@ -68,55 +68,96 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Registo de Funcionário</title>
+    <title>Registo de Funcionário - Hotel Sol&Mar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('imagens/background2.png') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+        }
+        .container-form {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 600px;
+            margin: 60px auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+        .button-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 10px 20px;
+            min-width: 150px;
+            vertical-align: middle;
+        }
+    </style>
 </head>
-<body class="bg-light">
-<div class="container mt-5">
-    <div class="card shadow p-4">
-        <h2 class="mb-4">Criar Nova Conta</h2>
+<body>
 
-        <?php if (!empty($erro)) : ?>
-            <div class="alert alert-danger"><?php echo $erro; ?></div>
-        <?php endif; ?>
+<div class="container-form">
+    <h2 class="mb-4 text-center">Criar Nova Conta</h2>
 
-        <?php if (!empty($sucesso)) : ?>
-            <div class="alert alert-success"><?php echo $sucesso; ?></div>
-        <?php endif; ?>
+    <?php if (!empty($erro)) : ?>
+        <div class="alert alert-danger"><?php echo $erro; ?></div>
+    <?php endif; ?>
 
-        <form method="post" action="">
-            <div class="mb-3">
-                <label for="nome" class="form-label">Nome</label>
-                <input type="text" name="nome" id="nome" class="form-control" required>
-            </div>
+    <?php if (!empty($sucesso)) : ?>
+        <div class="alert alert-success"><?php echo $sucesso; ?></div>
+    <?php endif; ?>
 
-            <div class="mb-3">
-                <label for="cargo" class="form-label">Cargo</label>
-                <input type="text" name="cargo" id="cargo" class="form-control">
-            </div>
+    <form method="post" action="">
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" name="nome" id="nome" class="form-control" required>
+        </div>
 
-            <div class="mb-3">
-                <label for="email" class="form-label">E-mail</label>
-                <input type="email" name="email" id="email" class="form-control" required>
-            </div>
+        <div class="mb-3">
+            <label for="cargo" class="form-label">Cargo</label>
+            <input type="text" name="cargo" id="cargo" class="form-control">
+        </div>
 
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" name="username" id="username" class="form-control" required>
-            </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="email" name="email" id="email" class="form-control" required>
+        </div>
 
-            <div class="mb-3">
-                <label for="senha" class="form-label">Senha</label>
-                <input type="password" name="senha" id="senha" class="form-control" required>
-            </div>
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" name="username" id="username" class="form-control" required>
+        </div>
 
-            <button type="submit" class="btn btn-primary">Registar</button>
-            <div class="mt-3">
-                <p>Já tem uma conta? <br><a href="login.php" class="btn btn-secondary">Faça login aqui</a></p>
-            </div>
+        <div class="mb-3">
+            <label for="senha" class="form-label">Senha</label>
+            <input type="password" name="senha" id="senha" class="form-control" required>
+        </div>
 
-        </form>
-    </div>
+        <div class="button-row">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-person-plus"></i> Registar
+            </button>
+
+            <a href="login.php" class="btn btn-secondary">
+                <i class="bi bi-box-arrow-in-right"></i> Fazer Login
+            </a>
+        </div>
+    </form>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

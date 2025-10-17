@@ -10,7 +10,11 @@ if (!isset($_SESSION["funcionario_id"])) {
 include "connection.php";
 
 // Consulta todas as reservas
-$query = "SELECT * FROM reservas ORDER BY id DESC";
+$query = "SELECT r.*, f.nome AS funcionario_nome
+          FROM reservas r
+          LEFT JOIN funcionarios f ON r.funcionario_id = f.id
+          ORDER BY r.id DESC";
+
 $result = mysqli_query($conn, $query);
 ?>
 
@@ -25,20 +29,89 @@ $result = mysqli_query($conn, $query);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
 <style>
-   body {
+  body {
     font-family: 'Poppins', sans-serif;
-    background: url('imagens/hotel1.png') no-repeat center center fixed;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)),
+                url('imagens/background.png') no-repeat center center fixed;
     background-size: cover;
-    position: relative;
-}
+    color: #fff;
+    min-height: 100vh;
+  }
 
-.container {
-    background: rgba(255, 255, 255, 0.9); /* destaca o conteúdo */
-    padding: 20px;
+  /* Navbar translúcida */
+  .navbar {
+    background: rgba(0, 0, 0, 0.7) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* Card estilo vidro */
+  .container {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    padding: 30px;
+    margin-top: 50px;
+  }
+
+  h2 {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+
+  .table {
+    color: #fff;
+  }
+
+  .table th {
+    background-color: rgba(0,0,0,0.5) !important;
+    color: #fff;
+  }
+
+  .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: rgba(255,255,255,0.05);
+  }
+
+  .table-striped > tbody > tr:nth-of-type(even) {
+    background-color: rgba(255,255,255,0.1);
+  }
+
+  .btn-primary {
+    background-color: #0078ff;
+    border: none;
     border-radius: 10px;
-}
+    transition: all 0.3s ease;
+  }
 
+  .btn-primary:hover {
+    background-color: #005fd1;
+    transform: scale(1.03);
+  }
+
+  .btn-danger {
+    border-radius: 10px;
+  }
+
+  .nav-link.active {
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  /* Ajuste para responsividade */
+  @media (max-width: 768px) {
+    .container {
+      padding: 20px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
 </style>
+
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
@@ -89,8 +162,8 @@ $result = mysqli_query($conn, $query);
                 <th>Check-in</th>
                 <th>Check-out</th>
                 <th>Estado</th>
+                <th>Funcionário</th>
                 <th>Ações</th>
-
             </tr>
             
         </thead>
@@ -107,6 +180,7 @@ $result = mysqli_query($conn, $query);
                     echo "<td>".$row['checkin']."</td>";
                     echo "<td>".$row['checkout']."</td>";
                     echo "<td>".$row['estado']."</td>";
+                    echo "<td>".htmlspecialchars($row['funcionario_nome'] ?? '—')."</td>";
                     echo "<td>
                       <a href='editar_reserva.php?id=".$row['id']."' class='btn btn-primary btn-sm me-1'>
                           <i class='bi bi-pencil-square'></i> Editar
