@@ -14,6 +14,8 @@ Login com Google OAuth
 Envio de email de boas-vindas após cadastro
 
 Gerenciamento de reservas
+<img width="1918" height="911" alt="Captura de tela 2025-10-17 185305" src="https://github.com/user-attachments/assets/bda58a84-eb33-4a60-866f-71af0ef3df48" />
+
 
 Criar, editar e excluir reservas
 
