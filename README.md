@@ -1,9 +1,6 @@
 <img width="1900" height="909" alt="Captura de tela 2025-10-17 183814" src="https://github.com/user-attachments/assets/a490aeac-84b0-4896-801c-eb7f69016c99" />🏨 Projeto Hotel Sol&Mar
 
 
-![Logo do Hotel Sol&Mar](teladelogin.png)
-
-
 Sistema de gestão para o Hotel Sol&Mar, desenvolvido em PHP com MySQL e integração de envio de emails via PHPMailer. Permite gerenciar funcionários, clientes e reservas de forma prática e segura, com autenticação tradicional e via Google OAuth.
 
 🚀 Funcionalidades
